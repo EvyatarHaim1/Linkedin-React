@@ -43,6 +43,7 @@ export default Header;
 const Div = styled.div`
    display: flex;
    position: sticky;
+   background-color: white;
    top: 0;
    justify-content: space-evenly;
    border-bottom: 0.1px solid lightgray;
