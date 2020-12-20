@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
 
-function HeaderOption({ avatar, Icon , title }) {
+function HeaderOption({ avatar, Icon , title, onClick }) {
     return (
-        <Div>
+        <Div onClick={onClick}>
             {Icon && <Icon className="headerOption_icon" />}
             {avatar && (
                 <Avatar className="headerOption_icon" src={avatar}/>
