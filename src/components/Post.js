@@ -64,4 +64,5 @@ const Post_body = styled.div`
 
 const Post_buttons = styled.div`
     display: flex;
+    justify-content: space-evenly;
 `

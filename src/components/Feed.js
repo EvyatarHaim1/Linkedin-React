@@ -7,9 +7,35 @@ import ImageIcon from '@material-ui/icons/Image';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
+import { db } from '../firebase';
+import firebase from 'firebase';
 function Feed() {
-
+    const [input, setInput] = useState('');
     const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+       db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => (
+           setPosts(snapshot.docs.map((doc) => ({
+                   id: doc.id,
+                   data: doc.data(),
+               }))
+            )
+       ));
+    }, [] )
+
+    const sendPost = (e) => {
+        e.preventDefault();
+        
+        db.collection('posts').add({
+            name: 'Evyatar Haim',
+            description: 'I finish this project today', 
+            message: input,
+            photoURL: '',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        setInput('');
+    };
 
     return (
         <Div>
@@ -17,8 +43,8 @@ function Feed() {
                 <div className="feed_input">
                     <CreateIcon />
                     <form>
-                        <input type="text" />
-                        <button type="submit"> Send </button>
+                        <input value={input} onChange={(e) => setInput(e.target.value)} type="text" />
+                        <button onClick={sendPost} type="submit"> Send </button>
                     </form>
                 </div>
                 <div className="feedInput_option">
@@ -29,13 +55,15 @@ function Feed() {
 
                 </div>
             </div>
-
-            <Post 
-                  name="Evyatar Haim" 
-                  description="Heyyyyyy" 
-                  message = "hello world"
-                  photoURL="https://media-exp1.licdn.com/dms/image/C4E35AQHUgd2Cs-FccA/profile-framedphoto-shrink_100_100/0/1606480219666?e=1608328800&v=beta&t=2bfDS5gu-EpJ1OjNOyIPS6wHxYvXGi20unqIGe1LZlQ"
-            />
+             {posts.map(({ id, data: {name, description, message, photoURL }}) => (
+                <Post 
+                    key={id}
+                    name={name}
+                    description={description} 
+                    message = {message}
+                    photoURL={photoURL}
+                />
+             ))}
         </Div>
     )
 }

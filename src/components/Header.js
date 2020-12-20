@@ -54,10 +54,11 @@ const Div = styled.div`
 `
 const HeaderLeft = styled.div`
     display: flex;
+    margin-left: -10%;
 
     img {
     object-fit: contain;
-    height: 40px;
+    height: 35px;
     margin-right: 10px;
         }
     
