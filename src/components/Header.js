@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import HeaderOption from './HeaderOption';
 import HomeIcon from '@material-ui/icons/Home';
@@ -9,9 +9,10 @@ import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { auth } from '../firebase';
-import { logout } from '../features/userSlice';
+import { logout, selectUser } from '../features/userSlice';
 function Header() {
 
+    const user = useSelector(selectUser)
     const dispatch = useDispatch();
 
     const logoutofApp = () => {
@@ -38,7 +39,7 @@ function Header() {
                 <HeaderOption title="Messaging" Icon={ChatIcon} />
                 <HeaderOption title="Notifications" Icon={NotificationsIcon} />
                 <HeaderOption title="Me" onClick={logoutofApp}
-                avatar="https://media-exp1.licdn.com/dms/image/C4E35AQHUgd2Cs-FccA/profile-framedphoto-shrink_100_100/0/1606480219666?e=1608328800&v=beta&t=2bfDS5gu-EpJ1OjNOyIPS6wHxYvXGi20unqIGe1LZlQ" />
+                avatar={user} />
 
                 
 
