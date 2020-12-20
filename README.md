@@ -8,3 +8,4 @@ Linkedin-React
 👉 MATERIAL UI (Design)
 👉 STYLED-COMPONENTS (Design)
 
+![alt text](https://github.com/EvyatarHaim1/Linkedin-React/blob/main/src/screenView.png)
